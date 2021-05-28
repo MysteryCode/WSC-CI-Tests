@@ -1,7 +1,8 @@
 <?php
-if (class_exists('PHP_CodeSniffer_Standards_AbstractPatternSniff', true) === false) {
-	throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractPatternSniff not found');
-}
+namespace WCF\Sniffs\ControlStructures;
+
+use PHP_CodeSniffer\Sniffs\AbstractPatternSniff;
+use PHP_CodeSniffer\Files\File;
 
 /**
  * This sniff is based on Squiz_Sniffs_ControlStructures_ControlSignatureSniff. Originally written
@@ -11,10 +12,9 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractPatternSniff', true) === fal
  * 
  * @author	Tim Duesterhus
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @category	Community Framework
+ * @package	WoltLabSuite\Core
  */
-class WCF_Sniffs_ControlStructures_ControlSignatureSniff extends PHP_CodeSniffer_Standards_AbstractPatternSniff {
+class ControlSignatureSniff extends AbstractPatternSniff {
 	/**
 	 * A list of tokenizers this sniff supports.
 	 *

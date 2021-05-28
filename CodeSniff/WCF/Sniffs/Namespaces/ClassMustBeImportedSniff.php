@@ -1,13 +1,17 @@
 <?php
+namespace WCF\Sniffs\Namespaces;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Disallows calling non global classes via FQN. Classes must be imported with use [...];
  * 
  * @author	Tim Duesterhus
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @category	Community Framework
+ * @package	WoltLabSuite\Core
  */
-class WCF_Sniffs_Namespaces_ClassMustBeImportedSniff implements PHP_CodeSniffer_Sniff {
+class ClassMustBeImportedSniff implements Sniff {
 	/**
 	 * Returns an array of tokens this test wants to listen for.
 	 *
@@ -26,7 +30,7 @@ class WCF_Sniffs_Namespaces_ClassMustBeImportedSniff implements PHP_CodeSniffer_
 	 * @param int                  $stackPtr  The position of the current token in the
 	 *                                        stack passed in $tokens.
 	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+	public function process(File $phpcsFile, $stackPtr) {
 		$tokens = $phpcsFile->getTokens();
 		
 		// skip files in global namespace
@@ -59,6 +63,21 @@ class WCF_Sniffs_Namespaces_ClassMustBeImportedSniff implements PHP_CodeSniffer_
 					if ($tClass !== false) {
 						$newClass = $phpcsFile->findNext(T_STRING, $tClass);
 						if ($tokens[$newClass]['content'] == $tokens[$end - 1]['content']) return;
+					}
+					$pos = $prevNonClassPart - 1;
+					while ($tokens[$pos]['code'] === T_WHITESPACE) $pos--;
+					$tNew = $tokens[$pos]['code'] === T_NEW;
+					
+					// are we trying to create a new object?
+					if ($tNew === false) {
+						// no
+						$parenthesis = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $end);
+						$nonParenthesis = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $end, null, true);
+						// are we accessing something that's static?
+						if ($parenthesis !== false && $parenthesis < $nonParenthesis) {
+							// no -> this looks like a function call of a namespaced function
+							return;
+						}
 					}
 					
 					$error = 'Namespaced classes (%s) must be imported with use.';

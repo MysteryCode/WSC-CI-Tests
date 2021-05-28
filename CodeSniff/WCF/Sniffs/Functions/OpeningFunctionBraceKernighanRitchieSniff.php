@@ -1,4 +1,9 @@
 <?php
+namespace WCF\Sniffs\Functions;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * This sniff is based on Generic_Sniffs_Functions_OpeningFunctionBraceKernighanRitchieSniff. Originally written
  * by Greg Sherwood <gsherwood@squiz.net> and Marc McIntyre <mmcintyre@squiz.net>
@@ -7,10 +12,9 @@
  * 
  * @author	Tim Duesterhus
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @category	Community Framework
+ * @package	WoltLabSuite\Core
  */
-class WCF_Sniffs_Functions_OpeningFunctionBraceKernighanRitchieSniff implements PHP_CodeSniffer_Sniff {
+class OpeningFunctionBraceKernighanRitchieSniff implements Sniff {
 	/**
 	 * Registers the tokens that this sniff wants to listen for.
 	 *
@@ -29,7 +33,7 @@ class WCF_Sniffs_Functions_OpeningFunctionBraceKernighanRitchieSniff implements 
 	 *
 	 * @return void
 	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+	public function process(File $phpcsFile, $stackPtr) {
 		$tokens = $phpcsFile->getTokens();
 		
 		if (isset($tokens[$stackPtr]['scope_opener']) === false) {
