@@ -3,6 +3,7 @@
 	<description>WoltLab Community Framework Coding Standard</description>
 	<exclude-pattern>*/zend/*</exclude-pattern>
 	<exclude-pattern>*/CodeSniff/*</exclude-pattern>
+	<exclude-pattern>*/parsedown/*</exclude-pattern>
 	
 	<rule ref="Generic.Classes.DuplicateClassName" />
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
@@ -42,11 +43,9 @@
 	<rule ref="WCF.Functions.OpeningFunctionBraceKernighanRitchie" />
 	<rule ref="WCF.Methods.MethodDeclaration" />
 	<rule ref="WCF.Namespaces.ClassMustBeImported" />
-	<rule ref="WCF.Namespaces.SortedUseDeclaration" />
 	<rule ref="WCF.Namespaces.UseDeclaration" />
 	<rule ref="WCF.WhiteSpace.SuperfluousWhitespace" />
 	<rule ref="Zend.Files.ClosingTag" />
-	
 	
 	<!-- Use Unix newlines -->
 	<rule ref="Generic.Files.LineEndings">

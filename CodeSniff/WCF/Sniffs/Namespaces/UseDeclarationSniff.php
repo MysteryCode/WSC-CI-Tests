@@ -4,10 +4,10 @@
  * by Greg Sherwood <gsherwood@squiz.net> and released under the terms of the BSD Licence.
  * See: https://github.com/squizlabs/PHP_CodeSniffer/blob/master/CodeSniffer/Standards/PSR2/Sniffs/Namespaces/UseDeclarationSniff.php
  * 
- * @author	Tim Duesterhus
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.woltlab.wcf
- * @category	Community Framework
+ * @author  Tim Duesterhus
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package com.woltlab.wcf
+ * @category    Community Framework
  */
 class WCF_Sniffs_Namespaces_UseDeclarationSniff implements PHP_CodeSniffer_Sniff {
 	/**
